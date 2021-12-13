@@ -30,10 +30,29 @@ public class MergeSort {
         log.info("插入排序 equals :{}  {} ", Arrays.equals(arr, clone2), ArrayUtils.toString(arr));
 
 
-        mergeSort(clone3,0,clone3.length-1);
+        mergeSort(clone3, 0, clone3.length - 1);
         Arrays.sort(clone);
         log.info("merge排序 equals :{}  {} ", Arrays.equals(clone, clone2), ArrayUtils.toString(arr));
 
+
+        int[] clone4 = arr.clone();
+
+        quickSort(clone4, 0, clone4.length - 1);
+    }
+
+    private static void quickSort(int[] arr, int l, int r) {
+
+        if (l >= r) {
+            return;
+        }
+
+        int prilot = arr[l];
+        int i = l;
+        int j = r;
+
+
+        quickSort(arr, l, i - 1);
+        quickSort(arr, j + 1, r);
 
     }
 
@@ -86,7 +105,7 @@ public class MergeSort {
     // tail
     private static void mergeSort(int[] arr, int l, int r) {
 
-        log.debug(">> arr={} l={},r={}",Arrays.copyOfRange(arr,l,r+1),l,r);
+        log.debug(">> arr={} l={},r={}", Arrays.copyOfRange(arr, l, r + 1), l, r);
         if (arr.length < 2) {
             return;
         }
@@ -95,51 +114,54 @@ public class MergeSort {
         }
         int m = (l - r >> 1) + r;
 
-        log.debug("merge left before  arr={} l={},r={}",Arrays.copyOfRange(arr,l,m+1),l,m);
+        log.debug("merge left before  arr={} l={},r={}", Arrays.copyOfRange(arr, l, m + 1), l, m);
 
         mergeSort(arr, l, m);
 
-        log.debug("merge right before  arr={} l={},r={}",Arrays.copyOfRange(arr,m+1,r+1),m+1,r);
+        log.debug("merge right before  arr={} l={},r={}", Arrays.copyOfRange(arr, m + 1, r + 1), m + 1, r);
 
-        mergeSort(arr, m+1, r); // +1
+        mergeSort(arr, m + 1, r); // +1
 
 
-        merge(arr,l,m,r);
-        log.debug("merge all after  arr={} l={},r={} \n",Arrays.copyOfRange(arr,l,r+1),l,r);
+        merge(arr, l, m, r);
+        log.debug("merge all after  arr={} l={},r={} \n", Arrays.copyOfRange(arr, l, r + 1), l, r);
 
 
     }
 
     private static void merge(int[] arr, int l, int m, int r) {
-        int[] tmp=new int[r-l+1];
+        int[] tmp = new int[r - l + 1];
 
-        int lp=l;
-        int rp=m+1;
-        int i=0;
+        int lp = l;
+        int rp = m + 1;
+        int i = 0;
 
-        while (lp<=m && rp<=r){
-            if (arr[lp]<arr[rp]){
-                tmp[i++]=arr[lp++];
-            }else {
-                tmp[i++]=arr[rp++];
+        while (lp <= m && rp <= r) {
+            if (arr[lp] < arr[rp]) {
+                tmp[i++] = arr[lp++];
+            } else {
+                tmp[i++] = arr[rp++];
             }
         }
 
-        while (lp<=m){
-            tmp[i++]=arr[lp++];
+        while (lp <= m) {
+            tmp[i++] = arr[lp++];
         }
 
-        while (rp<=r){
-            tmp[i++]=arr[rp++];
+        while (rp <= r) {
+            tmp[i++] = arr[rp++];
         }
 
         for (int j = 0; j < tmp.length; j++) {
-            arr[l+j]=tmp[j];
+            arr[l + j] = tmp[j];
         }
 
     }
 
     public static void swap(int[] a, int i, int j) {
+        if (i == j) {
+            return;
+        }
         a[i] = a[i] ^ a[j];
         a[j] = a[i] ^ a[j];
         a[i] = a[j] ^ a[i];
