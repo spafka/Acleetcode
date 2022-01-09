@@ -39,6 +39,8 @@ import io.github.spafka.leetcode.BTreePrinter;
 import io.github.spafka.leetcode.TreeNode;
 import org.junit.Test;
 
+import java.util.List;
+
 /**
  * 2021-12-19 10:18:05
  */
@@ -96,6 +98,10 @@ public class ConvertSortedArrayToBinarySearchTree {
         TreeNode treeNode = solution.sortedArrayToBST(new int[]{-10, -3, 0, 5, 9});
 
         BTreePrinter.printNode(treeNode);
+
+        List<List<Integer>> lists = new BinaryTreeLevelOrderTraversal.Solution().levelOrder(treeNode);
+
+
     }
 //leetcode submit region end(Prohibit modification and deletion)
 

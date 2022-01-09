@@ -38,7 +38,7 @@ import java.util.Queue;
  */
 public class BinaryTreeLevelOrderTraversal {
     public static void main(String[] args) {
-        Solution solution = new BinaryTreeLevelOrderTraversal().new Solution();
+
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 
@@ -57,7 +57,7 @@ public class BinaryTreeLevelOrderTraversal {
      * }
      * }
      */
-    class Solution {
+  public static class Solution {
         List<List<Integer>> res = new LinkedList<>();
 
         public List<List<Integer>> levelOrder(TreeNode root) {
@@ -71,6 +71,8 @@ public class BinaryTreeLevelOrderTraversal {
             while (!q.isEmpty()) {
 
                 int sz = q.size();
+
+                System.out.println(sz);
 
                 List<Integer> level = new LinkedList<>();
                 for (int i = 0; i < sz; i++) {
