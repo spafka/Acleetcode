@@ -1,10 +1,10 @@
 package io.github.spafka.leetcode;
 
 
-public class TreeNode<T extends Comparable>  {
+public class TreeNode<N extends TreeNode>  {
     public int val;
-    public TreeNode<T> left;
-    public TreeNode<T> right;
+    public N left;
+    public N right;
 
     public TreeNode() {
     }
@@ -13,11 +13,7 @@ public class TreeNode<T extends Comparable>  {
         this.val = val;
     }
 
-    TreeNode(int val, TreeNode left, TreeNode right) {
-        this.val = val;
-        this.left = left;
-        this.right = right;
-    }
+
 
 
 }

@@ -3,16 +3,14 @@ package io.github.spafka.leetcode.binarytree;
 import io.github.spafka.leetcode.BTreePrinter;
 import io.github.spafka.leetcode.TreeNode;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 /***
  * @see {https://www.javadevjournal.com/data-structure/avl-tree/}
  */
 //AVL Tree Node
-class AVLNode extends TreeNode {
-
-    AVLNode left, right;
-    int val;
+class AVLNode extends TreeNode<AVLNode> {
     int height;
 
     public AVLNode() {
@@ -31,8 +29,8 @@ class AVLNode extends TreeNode {
 }
 
 
-class AVLTree extends TreeNode<Integer> {
-    private AVLNode root;
+class AVLTree {
+    AVLNode root;
 
     public AVLTree() {
         root = null;
@@ -70,20 +68,20 @@ class AVLTree extends TreeNode<Integer> {
      * @return
      */
     private AVLNode insert(int val, AVLNode avlNode) {
-        if (avlNode == null)
+        if (avlNode == null) {
             avlNode = new AVLNode(val);
-        else if (val < avlNode.val) {
+        } else if (val < avlNode.val) {
             avlNode.left = insert(val, avlNode.left);
             if (height(avlNode.left) - height(avlNode.right) == 2)
                 if (val < avlNode.left.val)
-                    avlNode = leftRotation(avlNode);
+                    avlNode = righrRotation(avlNode);
                 else
                     avlNode = leftRightRotation(avlNode);
         } else if (val > avlNode.val) {
             avlNode.right = insert(val, avlNode.right);
             if (height(avlNode.right) - height(avlNode.left) == 2)
                 if (val > avlNode.right.val)
-                    avlNode = rightRotation(avlNode);
+                    avlNode = leftRotation(avlNode);
                 else
                     avlNode = rightLeftRotation(avlNode);
         } else
@@ -92,11 +90,12 @@ class AVLTree extends TreeNode<Integer> {
         return avlNode;
     }
 
+
     /**
      * @param avlNode
      * @return
      */
-    private AVLNode leftRotation(AVLNode avlNode) {
+    private AVLNode righrRotation(AVLNode avlNode) {
         AVLNode k1 = avlNode.left;
         avlNode.left = k1.right;
         k1.right = avlNode;
@@ -110,7 +109,7 @@ class AVLTree extends TreeNode<Integer> {
      * @param avlNode
      * @return
      */
-    private AVLNode rightRotation(AVLNode avlNode) {
+    private AVLNode leftRotation(AVLNode avlNode) {
         AVLNode node = avlNode.right;
         avlNode.right = node.left;
         node.left = avlNode;
@@ -126,8 +125,8 @@ class AVLTree extends TreeNode<Integer> {
      * @return
      */
     private AVLNode leftRightRotation(AVLNode avlNode) {
-        avlNode.left = rightRotation(avlNode.left);
-        return leftRotation(avlNode);
+        avlNode.left = leftRotation(avlNode.left);
+        return righrRotation(avlNode);
     }
 
     /**
@@ -137,8 +136,8 @@ class AVLTree extends TreeNode<Integer> {
      * @return
      */
     private AVLNode rightLeftRotation(AVLNode avlNode) {
-        avlNode.right = leftRotation(avlNode.right);
-        return rightRotation(avlNode);
+        avlNode.right = righrRotation(avlNode.right);
+        return leftRotation(avlNode);
     }
 
     /**
@@ -214,44 +213,53 @@ class AVLTree extends TreeNode<Integer> {
 
 
 public class AVLTreeHelper {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
         AVLTree avlTree = new AVLTree();
 
+        avlTree.insert(3);
+        avlTree.insert(2);
+        avlTree.insert(1);
+
+        AVLNode root = avlTree.root;
+        BTreePrinter.printNode(root);
+
+        System.in.read();
+
         char ch;
-        do {
-            System.out.println("\nAVLTree Operations\n");
-            System.out.println("1. insert ");
-            System.out.println("2. search");
-            System.out.println("3. count nodes");
-            System.out.println("4. print nodes");
-            int choice = scanner.nextInt();
-            switch (choice) {
-                case 1:
-                    System.out.println("Enter integer element to insert");
-                    avlTree.insert(scanner.nextInt());
-                    break;
-                case 2:
-                    System.out.println("Enter integer element to search");
-                    System.out.println("Search result : " + avlTree.search(scanner.nextInt()));
-                    break;
-                case 3:
-                    System.out.println("Nodes = " + avlTree.countNodes());
-                    break;
-                case 4:
-                    System.out.println("Nodes = ");
-                    BTreePrinter.printNode(avlTree);
-                    break;
-                default:
-                    System.out.println("Wrong Entry \n ");
-                    break;
-            }
-
-            System.out.print("\nIn order : ");
-            avlTree.inorder();
-
-            System.out.println("\nDo you want to continue (Type y or n) \n");
-            ch = scanner.next().charAt(0);
-        } while (ch == 'Y' || ch == 'y');
+//        do {
+//            System.out.println("\nAVLTree Operations\n");
+//            System.out.println("1. insert ");
+//            System.out.println("2. search");
+//            System.out.println("3. count nodes");
+//            System.out.println("4. print nodes");
+//            int choice = scanner.nextInt();
+//            switch (choice) {
+//                case 1:
+//                    System.out.println("Enter integer element to insert");
+//                    avlTree.insert(scanner.nextInt());
+//                    break;
+//                case 2:
+//                    System.out.println("Enter integer element to search");
+//                    System.out.println("Search result : " + avlTree.search(scanner.nextInt()));
+//                    break;
+//                case 3:
+//                    System.out.println("Nodes = " + avlTree.countNodes());
+//                    break;
+//                case 4:
+//                    System.out.println("Nodes = ");
+//                    BTreePrinter.printNode(avlTree);
+//                    break;
+//                default:
+//                    System.out.println("Wrong Entry \n ");
+//                    break;
+//            }
+//
+//            System.out.print("\nIn order : ");
+//            avlTree.inorder();
+//
+//            System.out.println("\nDo you want to continue (Type y or n) \n");
+//            ch = scanner.next().charAt(0);
+//        } while (ch == 'Y' || ch == 'y');
     }
 }
