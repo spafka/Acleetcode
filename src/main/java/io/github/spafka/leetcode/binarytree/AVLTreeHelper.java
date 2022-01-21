@@ -74,6 +74,7 @@ class AVLTree {
             avlNode.left = insert(val, avlNode.left);
             if (height(avlNode.left) - height(avlNode.right) == 2)
                 if (val < avlNode.left.val)
+                    // 递归的上层节点会触发此，本层不会触发
                     avlNode = righrRotation(avlNode);
                 else
                     avlNode = leftRightRotation(avlNode);
@@ -224,7 +225,20 @@ public class AVLTreeHelper {
         AVLNode root = avlTree.root;
         BTreePrinter.printNode(root);
 
-        System.in.read();
+
+        int a[]=new int[]{1,2,3,4,5};
+         avlTree = new AVLTree();
+        for (int i : a) {
+            avlTree.insert(i);
+            BTreePrinter.printNode(avlTree.root);
+        }
+
+        a=new int[]{7,8,9,10,1,2,3,4,5};
+        avlTree = new AVLTree();
+        for (int i : a) {
+            avlTree.insert(i);
+            BTreePrinter.printNode(avlTree.root);
+        }
 
         char ch;
 //        do {
