@@ -32,6 +32,7 @@ package io.github.spafka.leetcode.editor.cn;
 
 /**
  * 2021-12-18 19:30:29
+ * @see {https://leetcode-cn.com/problems/binary-search/}
  */
 public class BinarySearch {
     public static void main(String[] args) {
