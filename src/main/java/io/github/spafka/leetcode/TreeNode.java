@@ -24,7 +24,7 @@ public class TreeNode<N extends TreeNode> {
 
     public static ListNode fromRange(int n) {
         assert n > 1;
-        ListNode dummy=new ListNode();
+        ListNode dummy=new ListNode(0);
          IntStream.rangeClosed(1, n).mapToObj(x -> new ListNode(x))
                 .reduce(dummy,(a, b) -> {
                     a.next = b;
