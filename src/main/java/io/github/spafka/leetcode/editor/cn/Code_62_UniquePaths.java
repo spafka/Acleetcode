@@ -49,35 +49,37 @@ package io.github.spafka.leetcode.editor.cn;
 // Related Topics 数学 动态规划 组合数学 
 // 👍 1263 👎 0
 
-  
-  /**
-  * 2022-02-02 14:22:19
-  * @see{https://leetcode-cn.com/problems/unique-paths}
-  */
-  public class Code_62_UniquePaths{
-      public static void main(String[] args) {
-           Solution solution = new Code_62_UniquePaths().new Solution();
-      }
-      //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int uniquePaths(int m, int n) {
-        int[][] f = new int[m][n];
-        for (int i = 0; i < m; ++i) {
-            f[i][0] = 1;
-        }
-        for (int j = 0; j < n; ++j) {
-            f[0][j] = 1;
-        }
-        for (int i = 1; i < m; ++i) {
-            for (int j = 1; j < n; ++j) {
-                f[i][j] = f[i - 1][j] + f[i][j - 1];
-            }
-        }
-        return f[m - 1][n - 1];
 
-
+/**
+ * 2022-02-02 14:22:19
+ *
+ * @see{https://leetcode-cn.com/problems/unique-paths}
+ */
+public class Code_62_UniquePaths {
+    public static void main(String[] args) {
+        Solution solution = new Code_62_UniquePaths().new Solution();
     }
-}
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int uniquePaths(int m, int n) {
+            int[][] f = new int[m][n];
+            for (int i = 0; i < m; ++i) {
+                f[i][0] = 1;
+            }
+            for (int j = 0; j < n; ++j) {
+                f[0][j] = 1;
+            }
+            for (int i = 1; i < m; ++i) {
+                for (int j = 1; j < n; ++j) {
+                    f[i][j] = f[i - 1][j] + f[i][j - 1];
+                }
+            }
+            return f[m - 1][n - 1];
+
+
+        }
+    }
 //leetcode submit region end(Prohibit modification and deletion)
 
-  }
+}
