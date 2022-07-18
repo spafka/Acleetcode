@@ -10,6 +10,15 @@ public class ListNode {
     public ListNode(int val) {
         this.val = val;
     }
+    public ListNode() {
+    }
+    public ListNode(int val,ListNode next) {
+
+        this.val=val;
+        this.next=next;
+    }
+
+
 
 
     // 1-N的 SEQ
@@ -59,9 +68,7 @@ public class ListNode {
     public String toString() {
         return String.format("[%s]", sb());
     }
-
     public String sb() {
-
         return next == null ? val + "" : val + "," + next.sb();
     }
 }
