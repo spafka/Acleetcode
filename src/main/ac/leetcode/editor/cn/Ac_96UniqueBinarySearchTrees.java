@@ -60,7 +60,7 @@ public class Ac_96UniqueBinarySearchTrees {
             int s = 0;
             for (int i = start; i <= end; i++) {
 
-                s += (build(start, i) * build(i+1, end));
+                s += (build(start, i-1) * build(i+1, end));
 
             }
             return s;
