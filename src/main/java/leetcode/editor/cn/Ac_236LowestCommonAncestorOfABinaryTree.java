@@ -1,7 +1,7 @@
 
 package leetcode.editor.cn;
-  
- //给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。 
+
+//给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。
 //
 // 百度百科中最近公共祖先的定义为：“对于有根树 T 的两个节点 p、q，最近公共祖先表示为一个节点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（
 //一个节点也可以是它自己的祖先）。” 
@@ -52,26 +52,62 @@ package leetcode.editor.cn;
 //
 
 
-/**2024-02-22 23:01:00*/
-public class Ac_236LowestCommonAncestorOfABinaryTree{
-      public static void main(String[] args) {
-           Solution solution = new Ac_236LowestCommonAncestorOfABinaryTree().new Solution();
-      }
-      //leetcode submit region begin(Prohibit modification and deletion)
 /**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
- * }
+ * 2024-02-22 23:01:00
  */
-class Solution {
-    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        
+public class Ac_236LowestCommonAncestorOfABinaryTree {
+    public static void main(String[] args) {
+        Solution solution = new Ac_236LowestCommonAncestorOfABinaryTree().new Solution();
+
+        TreeNode treeNode = new Ac_108ConvertSortedArrayToBinarySearchTree.Solution()
+                .sortedArrayToBST(new int[]{1, 2, 3, 4, 5, 6, 7});
+
+
+        TreeNode lowestCommonAncestor = solution.lowestCommonAncestor(treeNode, null, null);
+
+        System.out.println();
+
+
     }
-}
+    //leetcode submit region begin(Prohibit modification and deletion)
+
+    /**
+     * Definition for a binary tree node.
+     * public class TreeNode {
+     * int val;
+     * TreeNode left;
+     * TreeNode right;
+     * TreeNode(int x) { val = x; }
+     * }
+     */
+    class Solution {
+        public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+
+            if (root == null) {
+                return null;
+            }
+
+            if (root == p || root == q) {
+                return root;
+            }
+
+            TreeNode l = lowestCommonAncestor(root.left, p, q);
+            TreeNode r = lowestCommonAncestor(root.right, p, q);
+
+            if (l != null && r != null) {
+                return root;
+            }
+
+            if (l != null) {
+                return l;
+            }
+            if (r != null) {
+                return r;
+            }
+            return null;
+
+        }
+    }
 //leetcode submit region end(Prohibit modification and deletion)
 
- }
+}

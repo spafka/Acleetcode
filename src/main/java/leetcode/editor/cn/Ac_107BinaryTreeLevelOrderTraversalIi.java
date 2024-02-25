@@ -95,7 +95,7 @@ public class Ac_107BinaryTreeLevelOrderTraversalIi {
                     level.add(poll.val);
 
                 }
-                list.addFirst(level);
+                list.add(0,level);
             }
 
             return list;
