@@ -58,6 +58,8 @@ package leetcode.editor.cn;
 //
 
 
+import java.util.List;
+
 /**2024-02-29 23:20:45*/
 public class Ac_127WordLadder{
       public static void main(String[] args) {
