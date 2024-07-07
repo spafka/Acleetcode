@@ -45,6 +45,8 @@ package leetcode.editor.cn;
 public class Ac_42TrappingRainWater{
       public static void main(String[] args) {
            Solution solution = new Ac_42TrappingRainWater().new Solution();
+
+           solution.trap(new int[]{0,1,0,2,1,0,1,3,2,1,2,1});
       }
       //leetcode submit region begin(Prohibit modification and deletion)
       class Solution {
@@ -65,7 +67,9 @@ public class Ac_42TrappingRainWater{
                   right_max[i] = Math.max(height[i], right_max[i + 1]);
               }
               for (int i = 1; i < size - 1; i++) {
-                  ans += Math.min(left_max[i], right_max[i]) - height[i];
+                  int ans1 = Math.min(left_max[i], right_max[i]) - height[i];
+                  System.out.println(ans1);
+                  ans += ans1;
               }
               return ans;
           }

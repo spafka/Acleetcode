@@ -57,6 +57,10 @@ import java.util.Map;
 public class Ac_438FindAllAnagramsInAString {
     public static void main(String[] args) {
         Solution solution = new Ac_438FindAllAnagramsInAString().new Solution();
+
+        List<Integer> anagrams = solution.findAnagrams("cbeaebabacd", "abc");
+
+        System.out.println();
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -80,7 +84,7 @@ public class Ac_438FindAllAnagramsInAString {
                         valid++;
                 }
                 // 判断左侧窗口是否要收缩
-                while (right - left >= t.length()) {
+                while (right - left == t.length()) {
                     // 当窗口符合条件时，把起始索引加入 res
                     if (valid == need.size())
                         res.add(left);
